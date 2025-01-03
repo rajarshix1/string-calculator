@@ -18,17 +18,24 @@ const calculatorNewLineSeparated = (numstr) => {
 const calculatorFinal = (numstr) => {
     let arr = []
     const delimiterCheck = numstr.match(/^\/\/(.+)\n/) 
-    console.log(delimiterCheck)
+    const multipleDelimiterCheck = numstr.match(/^\/\/\[(.+)]\n/)
+    // console.log(delimiterCheck)
     let delimiter = /[,\n]/;
-    if (delimiterCheck) {
+    
+    if (multipleDelimiterCheck) {
+        console.log('multipleDelimiterCheck', multipleDelimiterCheck[1].replace(/\[/g, '').replace(/\]/g, '') )
+        delimiter = new RegExp(`[${multipleDelimiterCheck[1].replace(/\[/g, '').replace(/\]/g, '')}]`);
+         numstr = numstr.replace(/^\/\/\[(.+)]\n/, '')
+    }
+    else if (delimiterCheck) {
         delimiter = new RegExp(`[${delimiterCheck[1]}]`);
         numstr = numstr.replace(/^\/\/(.+)\n/, '')  
     }
-    console.log('delimiter', delimiter)
+    // console.log('delimiter', delimiter)
     numstr.split(delimiter).map(e=>{
         arr.push(Number(e))
     })
-    console.log(arr)
+    // console.log(arr)
     const negativeNumbers = arr.filter(num => num < 0);
     if (negativeNumbers.length === 0) {
         const total = arr.filter(num => num <= 1000).reduce((acc, curr) => acc + curr, 0)
