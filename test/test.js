@@ -15,17 +15,20 @@ describe("calculator", () => {
     });
 
     ///
-    test("should return 15", () => {
+    test("should return 15, delimiter defined at beginning", () => {
         expect(calculatorFinal("//p\n1p2p3p9")).toBe(15);
     });
-    test("should return 21", () => {
+    test("should return 21, default delimiter comma and newline", () => {
         expect(calculatorFinal("1,2\n3,15")).toBe(21);
     });
-    test("should return 6, multiple delimiter", () => {
+    test("should return 6, multiple delimiter, single character", () => {
         expect(calculatorFinal("//[*][%]\n1*2%3")).toBe(6);
     });
-    test("should return 6, multiple delimiter", () => {
+    test("should return 6, multiple delimiter, more than one character", () => {
         expect(calculatorFinal("//[**][%%]\n1**2%%3")).toBe(6);
+    });
+    test("should return 6, multiple delimiter, more than one character", () => {
+        expect(calculatorFinal("//[**][helloworld]\n1**2helloworld3")).toBe(6);
     });
     test("should ignore numbers larger than 1000", () => {
         expect(calculatorFinal("1,2\n3,15,1000,292929,7832947329847")).toBe(1021);
