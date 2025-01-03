@@ -19,6 +19,9 @@ describe("calculator", () => {
     test("should return true", () => {
         expect(calculatorFinal("1,2\n3,15")).toBe(21);
     });
+    test("should throw error for negative numbers", () => {
+        expect(() => calculatorFinal("-1,2\n3,15,-3")).toThrow('negatives not allowed : -1, -3');
+    });
     // test("should return true", () => {
     //     expect(calculatorFinal("1\n2\n3\n9")).toBe(15);
     // });

@@ -29,7 +29,14 @@ const calculatorFinal = (numstr) => {
         arr.push(Number(e))
     })
     console.log(arr)
-    const total = arr.reduce((acc, curr) => acc + curr, 0)
-    return total
+    const negativeNumbers = arr.filter(num => num < 0);
+    if (negativeNumbers.length === 0) {
+        const total = arr.reduce((acc, curr) => acc + curr, 0)
+        return total
+    } else {
+        throw new Error(`negatives not allowed : ${negativeNumbers.join(', ')}`)
+
+    }
+
 }
 module.exports = {calculatorCommaSeparated, calculatorNewLineSeparated, calculatorFinal};
